@@ -1,0 +1,227 @@
+#include<iostream>
+using namespace std;
+class DynamicIntegerArray{
+protected:
+    int *data;
+    int _size;
+public:
+    DynamicIntegerArray(){
+        this->_size=0;
+        this->data=new int[0];
+    }
+    DynamicIntegerArray(int arr[],int _size){
+        this->_size=_size;
+        this->data=new int[_size];
+        for(int i=0;i<_size;i++)
+            data[i]=arr[i];
+    }
+    DynamicIntegerArray(const DynamicIntegerArray &o){
+        this->_size=o._size;
+        this->data=new int[o._size];
+        for(int i=0;i<_size;i++)
+            data[i]=o.data[i];
+    }
+    int getSize()const{
+        return _size;
+    }
+    void insertar(int value,int pos){
+        int *b;
+        b=new int[_size+1];
+        for(int i=0;i<_size+1;i++)
+        {
+            if(i<pos){
+                b[i]=data[i];
+            }
+            else if(i==pos){
+                b[i]=value;
+            }
+            else if(i>pos){
+                b[i]=data[i-1];
+            }
+        }
+        delete [] data;
+        for(int i=0;i<_size+1;i++)
+            cout<<b[i]<<endl;
+        cout<<value<<" "<<pos<<endl;
+        data=b;
+    }
+    void remover(int pos){
+        int *b,aux;
+        b=new int[_size -1];
+        int j=0;
+        for(int i=0;i<_size;i++){
+            if(i!=pos-1){
+                b[j]=data[i];
+                j++;
+            }
+            //cout<<b[i]<<endl;
+            //cout<<pos<<" "<<endl;
+        }
+        delete [] data;
+        for(int i=0;i<_size-1;i++)
+            cout<<b[i]<<endl;
+        data=b;
+    }
+    void push_backs(int value){
+        int *b;
+        b=new int[_size+1];
+        for(int i=0;i<_size;i++)
+            b[i]=data[i];
+        b[_size]=value;
+        delete [] data;
+        for(int i=0;i<_size+1;i++)
+            cout<<b[i]<<endl;
+        data=b;
+    }
+    ~DynamicIntegerArray(){
+        delete[] data;
+    }
+};
+class Personaje:public DynamicIntegerArray {
+private:
+    string especie, tipo, genero, nombre, poderes;
+    int edad;
+public:
+    Personaje(string especie, int edad, string genero, string nombre, string tipo, string poderes) {
+        this->especie = especie;
+        this->edad = edad;
+        this->genero = genero;
+        this->nombre = nombre;
+        this->tipo = tipo;
+        this->poderes = poderes;
+    }
+    Personaje(){};
+    Personaje(const Personaje& o) {
+        this->especie = o.especie;
+        this->edad = o.edad;
+        this->genero = o.genero;
+        this->nombre = o.nombre;
+        this->tipo = o.tipo;
+        this->poderes = o.poderes;
+    }
+    string getEspecie() const {
+        return especie;
+    }
+
+    int getEdad() const {
+        return edad;
+    }
+
+    string getNombre() const {
+        return nombre;
+    }
+
+    string getTipo() const {
+        return tipo;
+    }
+
+    string getGenero() const {
+        return genero;
+    }
+
+    string getPoderes() const {
+        return poderes;
+    }
+    void setNombre(string _nombre){
+        nombre=_nombre;
+    }
+    void setEdad(int _edad){
+
+        edad=_edad;
+    }
+    void setTipo(string _tipo){
+        tipo=_tipo;
+    }
+    void setEspecie(string _especie){
+        especie=_especie;
+    }
+    void setGenero(string _genero){
+        genero=_genero;
+    }
+    void setPoderes(string _poderes){
+        poderes=_poderes;
+    }
+    /*void mostrar(){
+        cout<<poderes<<especie<<nombre<<tipo<<edad<<genero;
+    }*/
+    void creacionPersonaje(Personaje *p,DynamicIntegerArray arr,int i){
+        string _nombre,_genero,_tipo,_poderes,_especie;
+        int _edad,opcion;
+        cout<<"Que opcion piensa realizar :"<<endl;
+        cout<<"1. Agregar un personaje :"<<endl;
+        cout<<"2. Agregar un personaje en una posicion dada :"<<endl;
+        cout<<"3. eliminar un personaje de una posicion :"<<endl; cin>>opcion;
+        cout<<"Nombre del personaje :"; cin>>_nombre;
+        fflush(stdin);
+        cout<<"El genero del personaje :"; getline(cin,_genero);
+        fflush(stdin);
+        cout<<"La edad del personaje :"; cin>>_edad;
+        fflush(stdin);
+        cout<<"Poderes del personaje :"; getline(cin,_poderes);
+        fflush(stdin);
+        cout<<"Es bueno o malo el personaje :"; getline(cin,_tipo);
+        fflush(stdin);
+        cout<<"De que especie es su personaje :"; getline(cin,_especie);
+        fflush(stdin);
+        if(opcion==1){
+            p->setEdad(_edad);
+            p->setNombre(_nombre);
+            p->setEspecie(_especie);
+            p->setPoderes(_poderes);
+            p->setGenero(_genero);
+            p->setTipo(_tipo);
+        }
+        else if (opcion==2){
+            p->setEdad(_edad);
+            p->setNombre(_nombre);
+            p->setEspecie(_especie);
+            p->setPoderes(_poderes);
+            p->setGenero(_genero);
+            p->setTipo(_tipo);
+        }
+        else if(opcion==3){
+            int pos;
+            cout<<"la posicion en la que se encuentra el personaje a eliminar :"; cin>>pos;
+            arr.remover(pos);
+        }
+        else{
+            cout<<"no existe esa opcion "<<endl;
+        }
+        cout<<"Soy el personaje "<<nombre<<" y tengo la edad de "<<edad<<" mi genero es "<<genero<<" soy de la especie "<<especie<<" mi poder es "<<poderes<<" y soy un tipo "<<tipo<<endl;
+
+    }
+    /*void imprimirDatos(Personaje *p ) {
+        cout<<"Soy el personaje "<<p->getNombre()<<" y tengo la edad de "<<p->getEdad()<<" mi genero es "<<p->getGenero()<<" soy de la especie "<<p->getEspecie()<<" mi poder es "<<p->getPoderes()<<" y soy un tipo "<<p->getTipo()<<endl;
+    }*/
+    ~Personaje() {}
+};
+
+int main() {
+    //DynamicIntegerArray pa;
+    //cout<<pa.getSize()<<endl;
+    //int arr[]={1,2,3,4,5};
+    //DynamicIntegerArray pa2(arr,5);
+    //DynamicIntegerArray pa3=pa2;
+    //cout<<pa3.getSize()<<endl;
+    //DynamicIntegerArray *ptr=&pa3;
+    //cout<<ptr->getSize()<<endl;
+    //pa2.insertar(3,3);
+    //pa2.push_backs(4);
+    //pa2.remover(1);
+    //string a;
+    //cout<<"Desea crear personajes o eliminarlos ? si/no:"<<endl; cin>>a;
+    Personaje *p;
+    DynamicIntegerArray arr;
+    int i=1;
+    /*while(a=="si"){
+        p->creacionPersonaje(p,arr,i);
+        i++;
+        cout<<"desea crear personajes o eliminarlos? si/no:"<<endl; cin>>a;
+    }*/
+    //p->imprimirDatos(p);
+    //Personaje p("humano",20,"masculino","mario","malo","botar fuego");
+    //p.getGenero();
+    //p.mostrar();
+    p->creacionPersonaje(p,arr,i);
+    return 0;
+}
