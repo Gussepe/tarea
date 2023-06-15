@@ -1,0 +1,91 @@
+
+#include <iostream>
+#include<memory>
+using namespace std;
+/*class Rectangulo {
+private:
+    int longitud, ancho;
+};
+void fun() {
+    Rectangulo* R = new Rectangulo();
+}*/
+/*class SmartPtr {
+    int* ptr;
+public:
+    explicit SmartPtr(int* p = NULL) { ptr = p; }
+    ~SmartPtr() { delete(ptr); }
+    int& operator*() { return *ptr; }
+    friend ostream& operator<<(ostream& output, SmartPtr ptr) { output << ptr.ptr; return output; }
+};
+int main(){
+    //while(1){
+    //    fun();
+    //}
+    SmartPtr ptr(new int());
+    *ptr = 20;
+    cout << *ptr<<" " << &ptr << " " <<ptr;
+}
+    return 0;
+*/
+/*
+template<class T>class SmartPtr {
+    T* ptr;
+public:
+    explicit SmartPtr(T* p = NULL) { ptr = p; }
+    ~SmartPtr() { delete(ptr); }
+    T& operator*() { return *ptr; }
+    T& operator->() { return ptr; }
+};
+int main() {
+    SmartPtr<int>ptr(new int());
+    *ptr = 20;
+    cout << *ptr<<" " << &ptr;
+    return 0;
+}
+*/
+/*
+class Rectangulo
+{
+
+private:
+    int ancho, longitud;
+public:
+    Rectangulo(int l,int b) {
+        longitud = l;
+        ancho = b;
+    };
+    int area() { return longitud * ancho; }
+
+};
+int main() {
+    unique_ptr<Rectangulo> P1(new Rectangulo(10, 5));
+    cout << P1->area() << endl;
+    unique_ptr<Rectangulo>P2;
+    P2 = move(P1);
+    cout << P2->area() << endl;
+    //cout << P1->area() << endl;
+    return 0;
+}
+*/
+class Rectangulo
+{
+
+private:
+    int longitud, ancho;
+public:
+    Rectangulo(int l,int b) {
+        longitud = l;
+        ancho = b;
+    };
+    int area() { return ancho * longitud; }
+};
+int main() {
+    shared_ptr<Rectangulo>P1(new Rectangulo(10, 5));
+    cout << P1->area() << endl;
+    shared_ptr<Rectangulo>P2;
+    P2 = P1;
+    cout << P2->area() << endl;
+    cout << P1->area() << endl;
+    cout << P1.use_count() << endl;
+    return 0;
+}
