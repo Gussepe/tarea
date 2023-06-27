@@ -89,3 +89,122 @@ int main() {
     cout << P1.use_count() << endl;
     return 0;
 }
+// ConsoleApplication1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+/*
+#include <iostream>
+#include<type_traits>
+#include<typeinfo>
+class SmallSize{};
+class BigSize{};
+template<class T>
+using ContainerType =
+typename std::conditional<sizeof(T) == 1, SmallSize, BigSize>::type;
+int main()
+{
+    ContainerType<bool>b;
+    std::cout << typeid(b).name() << "\n";
+    ContainerType<int>i;
+    std::cout << typeid(i).name() << "\n";
+
+    return 0;
+}
+*/
+// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
+// Depurar programa: F5 o menú Depurar > Iniciar depuración
+
+// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
+//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
+//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
+//   4. Use la ventana Lista de errores para ver los errores
+//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
+// 6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
+
+/*#include<iostream>
+#include<type_traits>
+class Class{};
+int main()
+{
+    std::cout << std::is_floating_point<Class>::value<<"\n";
+    std::cout << std::is_floating_point<float>::value << "\n";
+    std::cout << std::is_floating_point<int>::value << "\n";
+    std::cout << std::is_floating_point<double>::value << "\n";
+
+    return 0;
+}
+*/
+/*
+#include<iostream>
+#include<type_traits>
+using namespace std;
+int main() {
+    cout << boolalpha << endl;
+    cout << "is null pointer: " << endl;
+    cout << " int *&: "
+        <<
+        is_null_pointer<decltype(nullptr)>::value<<endl;
+    cout << "int *[10]: "
+        << is_null_pointer<int* [10]>::value
+        << endl;
+    cout << "float *:"
+        << is_null_pointer<float*>::value
+        << endl;
+    cout << "int [10]: "
+        << is_null_pointer<int [10]>::value
+        << endl;
+    return 0;
+
+}
+*/
+/*
+#include<iostream>
+#include<type_traits>
+using namespace std;
+int main() {
+    cout << boolalpha
+        <<
+        is_null_pointer<decltype(nullptr)>::value
+        << endl
+        << is_null_pointer<int*>::value
+        << endl
+        <<
+        is_pointer<decltype(nullptr)>::value
+        << endl
+        << is_pointer<int*>::value
+        << endl;
+    return 0;
+}
+*/
+/*
+#include<iostream>
+#include<type_traits>
+using namespace std;
+class GFG {
+
+};
+int main() {
+    cout << alignment_of<GFG>::value << endl;
+    cout << alignment_of<int>() << endl;
+    cout << alignment_of<double>() << endl;
+    cout << alignment_of<float>() << endl;
+    cout << alignment_of<char>() << endl;
+    cout << alignment_of<string>() << endl;
+    return 0;
+}
+*/
+#include<iostream>
+#include<type_traits>
+using namespace std;
+class A{};
+int main() {
+    cout << boolalpha;
+    cout << is_array<A>::value << endl;
+    cout << is_array<A[]>::value << endl;
+    cout << is_array<A[3]>::value << endl;
+    cout << is_array<float>::value << endl;
+    cout << is_array<int>::value << endl;
+    cout << is_array<int[]>::value << endl;
+    cout << is_array<int[3]>::value << endl;
+    cout << is_array<array<int,3>>::value << endl;
+    return 0;
+}
