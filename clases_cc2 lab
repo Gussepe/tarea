@@ -1,0 +1,99 @@
+/*#include <iostream>
+#include<utility>
+using namespace std;
+
+void add(int a, int b) {
+	cout << (a + b) << endl;
+}
+void add(double a, double b) {
+	cout << (a + b) << endl;
+}
+void add(int a, int b,int c) {
+	cout << (a + b+ c) << endl;
+}
+void add(double a, double b,double c) {
+	cout << (a + b+ c) << endl;
+}
+void add(int a, double b) {
+	cout << (a + b) << endl;
+}
+void add(double a, int b) {
+	cout << (a + b) << endl;
+}
+
+class Add
+{
+
+private:
+	int num,num1;
+	double doub, doub1;
+public:
+	Add(int a, int b) {
+		num = a; num1 = b;
+	}
+	Add(double a, double b) {
+		doub = a; doub = b;
+	}
+	void suma(int a, int b) {
+		cout << (a + b) << endl;
+	}
+	void suma(double a, double b) {
+		cout << (a + b) << endl;
+	}
+};
+void print(double a) {
+	cout << "es un double" << endl;
+}
+void print(int a) {
+	cout << "es un entero" << endl;
+}
+void print(char a) {
+	cout << "es un char" << endl;
+}
+void print(string a) {
+	cout << "es un string" << endl;
+}
+
+void print(char const *a) {
+	cout << "es un char" << endl;
+}
+
+int main()
+{
+	Add a(4, 7);
+	a.suma(4, 6);
+	int a [3] = {1,3,4};
+	print("hola");
+	add(5 , 4,5);
+	add(7, 9, 6);
+	add(4.9, 9.0,3.1);
+	add(3, 9.4);
+	move(a);
+	for (int i = 0;i < 3;i++)
+		cout << a[i] << endl;
+	return 0;
+}
+*/
+#include<iostream>
+#include<string>
+#include<vector>
+#include<utility>
+std::vector<std::string>createAndInsert();
+int main() {
+	std::vector<std::string>vecString;
+	vecString = createAndInsert();
+	for (const auto& s : vecString) {
+		std::cout << s << "\n";
+	}
+	return EXIT_SUCCESS;
+}
+std::vector<std::string>createAndInsert() {
+	std::vector<std::string>vec;
+	vec.reserve(3);
+	std::string str("Hello");
+	vec.push_back(str);
+	
+	vec.push_back(str + str);
+	vec.push_back(std::move(str));
+	return vec;
+}
